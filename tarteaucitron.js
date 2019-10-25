@@ -1309,6 +1309,7 @@ var tarteaucitron = {
 
             if (document.getElementById('tarteaucitronCookiesNumber') !== null) {
                 document.getElementById('tarteaucitronCookiesNumber').innerHTML = nb;
+                document.getElementById('tarteaucitronCookiesNumber').setAttribute('aria-label', nb + ' cookie' + s);
             }
 
             if (document.getElementById('tarteaucitronCookiesNumberBis') !== null) {
