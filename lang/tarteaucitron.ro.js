@@ -3,11 +3,11 @@ tarteaucitron.lang = {
     "adblock": "Buna! Acest site este transparent și vă permite să alegeți serviciile terță parte pe care doriți să le permiteți.",
     "adblock_call": "Dezactivați-vă adblocker-ul pentru a începe personalizarea.",
     "reload": "Reincarca Pagina",
-    
+
     "alertBigScroll": "Continuând să defilați,",
     "alertBigClick": "Dacă continuați să răsfoiți acest site,",
     "alertBig": "permiteți tuturor serviciilor terță parte",
-    
+
     "alertBigPrivacy": "Acest site utilizează cookie-uri și vă oferă control asupra a ceea ce doriți să activați",
     "alertSmall": "Gestionați serviciile",
     "personalize": "Personalizați",
@@ -15,13 +15,14 @@ tarteaucitron.lang = {
     "close": "Închide",
 
     "privacyUrl": "Politica de confidentialitate",
-    
+
     "all": "Preferință pentru toate serviciile",
 
     "info": "Protejați-vă confidențialitatea",
     "disclaimer": "Permițând acestor servicii terțe părți să acceptați cookie-urile și utilizarea tehnologiilor de urmărire necesare pentru buna funcționare a acestora.",
     "allow": "Permite",
     "deny": "Refuza",
+    "removeCookie": "Remove cookie",
     "noCookie": "Acest serviciu nu utilizează modul cookie.",
     "useCookie": "Acest serviciu se poate instala",
     "useCookieCurrent": "Acest serviciu a fost instalat",
@@ -37,7 +38,7 @@ tarteaucitron.lang = {
     "newWindow": "(fereastră nouă)",
     "allowAll": "Permiteți toate cookie-urile",
     "denyAll": "Respinge toate cookie-urile",
-    
+
     "fallback": "este dezactivat.",
 
     "ads": {

@@ -3,11 +3,11 @@ tarteaucitron.lang = {
     "adblock": "Ahoj! Tato stránka je transparetní a umožňuje ti si přímo vybrat, jaké služby třetích stran chceš povolit.",
     "adblock_call": "Pro úpravu osobních preferencí si, prosím, vypni adblock.",
     "reload": "Načíst stránku znovu",
-    
+
     "alertBigScroll": "Pokračováním ve scrollování,",
     "alertBigClick": "Pokud pokračujete v brouzdání našich stránek,",
     "alertBig": "povolujete všechny služby třetích stran.",
-    
+
     "alertBigPrivacy": "Tato stránka využívá cookies a dává ti na výběr, co chceš aktivovat",
     "alertSmall": "Spravovat služby",
     "personalize": "Přizpůsobit",
@@ -15,13 +15,14 @@ tarteaucitron.lang = {
     "close": "Zavřít",
 
     "privacyUrl": "Zásady ochrany osobních údajů",
-    
+
     "all": "Nastavení všech služeb",
 
     "info": "Chrání tvé soukromí",
     "disclaimer": "Povolením těchto služeb třetích stran, přijímáš jejich cookies, jež jsou nezbytné pro řádné fungování jejich technologií.",
     "allow": "Povolit",
     "deny": "Zamítnout",
+    "removeCookie": "Remove cookie",
     "noCookie": "Tato služba nepoužívá cookies.",
     "useCookie": "Tato služba může nainstalovat",
     "useCookieCurrent": "Tato služba nainstalovala",
@@ -37,7 +38,7 @@ tarteaucitron.lang = {
     "newWindow": "(new window)",
     "allowAll": "Allow all cookies",
     "denyAll": "Deny all cookies",
-    
+
     "fallback": "je vypnutý.",
 
     "ads": {
