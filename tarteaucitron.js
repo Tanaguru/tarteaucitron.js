@@ -281,7 +281,7 @@ var tarteaucitron = {
                 html += '   <div id="tarteaucitronServices">';
                 html += '      <div class="tarteaucitronLine tarteaucitronMainLine" id="tarteaucitronMainLineOffset">';
                 html += '         <span class="tarteaucitronH1" role="heading" aria-level="1" id="dialogTitle">'+ tarteaucitron.lang.title + '</span>';
-                html += '         <div id="tarteaucitronInfo" class="tarteaucitronInfoBox">';
+                html += '         <p id="tarteaucitronInfo" class="tarteaucitronInfoBox">';
                 html += '         ' + tarteaucitron.lang.disclaimer;
                 if (tarteaucitron.parameters.privacyUrl !== "") {
                     html += '   <br/><br/>';
@@ -289,7 +289,7 @@ var tarteaucitron = {
                     html += '       ' + tarteaucitron.lang.privacyUrl;
                     html += '   </button>';
                 }
-                html += '         </div>';
+                html += '         </p>';
                 html += '         <div class="tarteaucitronName">';
                 html += '            <span class="tarteaucitronH2" role="heading" aria-level="2">' + tarteaucitron.lang.all + '</span>';
                 html += '         </div>';
@@ -309,9 +309,9 @@ var tarteaucitron = {
                     html += '            <div class="tarteaucitronTitle">';
                     html += '               <button type="button" onclick="tarteaucitron.userInterface.toggle(\'tarteaucitronDetails' + cat[i] + '\', \'tarteaucitronInfoBox\', this);return false" aria-expanded="false" aria-controls="tarteaucitronDetails' + cat[i] + '">&#10011; ' + tarteaucitron.lang[cat[i]].title + '</button>';
                     html += '            </div>';
-                    html += '            <div id="tarteaucitronDetails' + cat[i] + '" class="tarteaucitronDetails tarteaucitronInfoBox">';
+                    html += '            <p id="tarteaucitronDetails' + cat[i] + '" class="tarteaucitronDetails tarteaucitronInfoBox">';
                     html += '               ' + tarteaucitron.lang[cat[i]].details;
-                    html += '            </div>';
+                    html += '            </p>';
                     html += '         <ul id="tarteaucitronServices_' + cat[i] + '"></ul></li>';
                 }
                 html += '         </ul>';
@@ -539,7 +539,7 @@ var tarteaucitron = {
             html += '<li id="' + service.key + 'Line" class="tarteaucitronLine">';
             html += '   <div class="tarteaucitronName">';
             html += '       <span class="tarteaucitronH3" role="heading" aria-level="3">' + service.name + '</span>';
-            html += '       <span id="tacCL' + service.key + '" class="tarteaucitronListCookies"></span><br/>';
+            html += '       <p id="tacCL' + service.key + '" class="tarteaucitronListCookies"></p><br/>';
 
             if (tarteaucitron.parameters.moreInfoLink == true) {
 

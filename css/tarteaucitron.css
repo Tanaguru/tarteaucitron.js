@@ -750,7 +750,7 @@ div.amazon_product {
     opacity: 0.4;
 }
 
-div#tarteaucitronInfo {
+p#tarteaucitronInfo {
     display: block!important;
     position: relative !important;
     text-align: center!important;
