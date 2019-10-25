@@ -968,7 +968,6 @@ var tarteaucitron = {
             } else {
                 div.style.display = 'none';
                 document.getElementById('tarteaucitronCookiesNumber').focus();
-                tarteaucitron.userInterface.css('tarteaucitron', 'display', 'none');
                 tarteaucitron.userInterface.css('tarteaucitronBack', 'display', 'none');
             }
         },
