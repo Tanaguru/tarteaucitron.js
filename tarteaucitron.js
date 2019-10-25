@@ -307,7 +307,7 @@ var tarteaucitron = {
                 for (i = 0; i < cat.length; i += 1) {
                     html += '         <li id="tarteaucitronServicesTitle_' + cat[i] + '" class="tarteaucitronHidden">';
                     html += '            <div class="tarteaucitronTitle">';
-                    html += '               <button type="button" onclick="tarteaucitron.userInterface.toggle(\'tarteaucitronDetails' + cat[i] + '\', \'tarteaucitronInfoBox\');return false">&#10011; ' + tarteaucitron.lang[cat[i]].title + '</button>';
+                    html += '               <button type="button" onclick="tarteaucitron.userInterface.toggle(\'tarteaucitronDetails' + cat[i] + '\', \'tarteaucitronInfoBox\', this);return false" aria-expanded="false" aria-controls="tarteaucitronDetails' + cat[i] + '">&#10011; ' + tarteaucitron.lang[cat[i]].title + '</button>';
                     html += '            </div>';
                     html += '            <div id="tarteaucitronDetails' + cat[i] + '" class="tarteaucitronDetails tarteaucitronInfoBox">';
                     html += '               ' + tarteaucitron.lang[cat[i]].details;
@@ -958,7 +958,7 @@ var tarteaucitron = {
                 tarteaucitron.userInterface.css('tarteaucitronBack', 'display', 'none');
             }
         },
-        "toggle": function (id, closeClass) {
+        "toggle": function (id, closeClass, button) {
             "use strict";
             var div = document.getElementById(id);
 
@@ -970,14 +970,19 @@ var tarteaucitron = {
                 tarteaucitron.fallback([closeClass], function (elem) {
                     if (elem.id !== id) {
                         elem.style.display = 'none';
+                        var button = elem.previousElementSibling.querySelector('button');
+                        if (button === null ) return;
+                        button.setAttribute('aria-expanded', false);
                     }
                 }, true);
             }
 
             if (div.style.display !== 'block') {
                 div.style.display = 'block';
+                button.setAttribute('aria-expanded', true);
             } else {
                 div.style.display = 'none';
+                button.setAttribute('aria-expanded', false);
             }
         },
         "order": function (id) {
