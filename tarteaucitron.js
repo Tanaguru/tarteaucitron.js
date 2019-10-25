@@ -561,10 +561,10 @@ var tarteaucitron = {
 
             html += '   </div>';
             html += '   <div class="tarteaucitronAsk">';
-            html += '       <button type="button" id="' + service.key + 'Allowed" class="tarteaucitronAllow" onclick="tarteaucitron.userInterface.respond(this, true);">';
+            html += '       <button type="button" id="' + service.key + 'Allowed" class="tarteaucitronAllow" onclick="tarteaucitron.userInterface.respond(this, true);" aria-label="' + tarteaucitron.lang.allow + ' ' + service.name + '">';
             html += '           <span class="icon" aria-hidden="true">&#10003; </span>' + tarteaucitron.lang.allow;
             html += '       </button> ';
-            html += '       <button type="button" id="' + service.key  + 'Denied" class="tarteaucitronDeny" onclick="tarteaucitron.userInterface.respond(this, false);">';
+            html += '       <button type="button" id="' + service.key  + 'Denied" class="tarteaucitronDeny" onclick="tarteaucitron.userInterface.respond(this, false);" aria-label="' + tarteaucitron.lang.deny + ' ' + service.name + '">';
             html += '           <span class="icon" aria-hidden="true">&#10007; </span>' + tarteaucitron.lang.deny;
             html += '       </button>';
             html += '   </div>';
