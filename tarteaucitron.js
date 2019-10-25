@@ -396,7 +396,7 @@ var tarteaucitron = {
                         html += '           ' + tarteaucitron.lang.close;
                         html += '       </button>';
                         html += '       <div class="tarteaucitronCookiesListMain" id="tarteaucitronCookiesTitle">';
-                        html += '            <span class="tarteaucitronH2" role="heading" aria-level="2" id="tarteaucitronCookiesNumberBis">0 cookie</span>';
+                        html += '            <span class="tarteaucitronH2" role="heading" aria-level="1" id="tarteaucitronCookiesNumberBis">0 cookie</span>';
                         html += '       </div>';
                         html += '       <div id="tarteaucitronCookiesList"></div>';
                         html += '    </div>';
@@ -1280,14 +1280,14 @@ var tarteaucitron = {
                     if (tarteaucitron.cookie.owner[name] !== undefined && tarteaucitron.cookie.owner[name].join(' // ') !== savedname) {
                         savedname = tarteaucitron.cookie.owner[name].join(' // ');
                         html += '<div class="tarteaucitronHidden">';
-                        html += '     <span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="3">';
+                        html += '     <span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="2">';
                         html += '        ' + tarteaucitron.cookie.owner[name].join(' // ');
                         html += '    </span>';
                         html += '</div><ul class="cookie-list">';
                     } else if (tarteaucitron.cookie.owner[name] === undefined && host !== savedname) {
                         savedname = host;
                         html += '<div class="tarteaucitronHidden">';
-                        html += '     <span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="3">';
+                        html += '     <span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="2">';
                         html += '        ' + host;
                         html += '    </span>';
                         html += '</div><ul class="cookie-list">';
