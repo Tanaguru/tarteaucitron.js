@@ -306,7 +306,7 @@ var tarteaucitron = {
                 html += '         <div class="clear"></div><ul>';
                 for (i = 0; i < cat.length; i += 1) {
                     html += '         <li id="tarteaucitronServicesTitle_' + cat[i] + '" class="tarteaucitronHidden">';
-                    html += '            <div class="tarteaucitronTitle">';
+                    html += '            <div class="tarteaucitronTitle" role="heading" aria-level="2">';
                     html += '               <button type="button" onclick="tarteaucitron.userInterface.toggle(\'tarteaucitronDetails' + cat[i] + '\', \'tarteaucitronInfoBox\', this);return false" aria-expanded="false" aria-controls="tarteaucitronDetails' + cat[i] + '">&#10011; ' + tarteaucitron.lang[cat[i]].title + '</button>';
                     html += '            </div>';
                     html += '            <p id="tarteaucitronDetails' + cat[i] + '" class="tarteaucitronDetails tarteaucitronInfoBox">';
