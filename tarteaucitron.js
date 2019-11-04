@@ -334,7 +334,7 @@ var tarteaucitron = {
                     html += '       ' + tarteaucitron.lang.alertBigPrivacy;
                     html += '   </p>';
                     html += '   <span class="tarteaucitronAlertBigBtnWrapper">';
-                    html += '   <button type="button" id="tarteaucitronPersonalize" onclick="tarteaucitron.userInterface.openPanel();">';
+                    html += '   <button type="button" id="tarteaucitronPersonalize" onclick="tarteaucitron.userInterface.openPanel();" aria-label="' + tarteaucitron.lang.personalizeCookies + '">';
                     html += '       ' + tarteaucitron.lang.personalize;
                     html += '   </button>';
 
@@ -363,7 +363,7 @@ var tarteaucitron = {
                     html += '   <button type="button" id="tarteaucitronPersonalize" onclick="tarteaucitron.userInterface.respondAll(true);" aria-label="' + tarteaucitron.lang.acceptAllCookies + '">';
                     html += '       <span class="icon" aria-hidden="true">&#10003; </span>' + tarteaucitron.lang.acceptAll;
                     html += '   </button>';
-                    html += '   <button type="button" id="tarteaucitronCloseAlert" onclick="tarteaucitron.userInterface.openPanel();">';
+                    html += '   <button type="button" id="tarteaucitronCloseAlert" onclick="tarteaucitron.userInterface.openPanel();" aria-label="' + tarteaucitron.lang.personalizeCookies + '">';
                     html += '       ' + tarteaucitron.lang.personalize;
                     html += '   </button>';
 

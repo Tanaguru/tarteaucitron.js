@@ -11,6 +11,7 @@ tarteaucitron.lang = {
     "alertBigPrivacy": "Tato stránka využívá cookies a dává ti na výběr, co chceš aktivovat",
     "alertSmall": "Spravovat služby",
     "personalize": "Přizpůsobit",
+    "personalizeCookies": "Customize cookie management",
     "acceptAll": "OK, přijmout vše",
     "acceptAllCookies": "OK, accept all cookies",
     "close": "Zavřít",

@@ -10,9 +10,10 @@ tarteaucitron.lang = {
 
     "alertBigPrivacy": "Ce site utilise des cookies et vous donne le contrôle sur ce que vous souhaitez activer",
     "alertSmall": "Gestion des services",
+    "personalize": "Personnaliser",
+    "personalizeCookies": "Personnaliser la gestion des cookies",
     "acceptAll": "OK, tout accepter",
     "acceptAllCookies": "OK, accepter tous les cookies",
-    "personalize": "Personnaliser",
     "close": "Fermer",
 
     "privacyUrl": "Politique de confidentialité",

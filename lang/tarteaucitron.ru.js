@@ -11,6 +11,7 @@ tarteaucitron.lang = {
     "alertBigPrivacy": "Этот сайт использует кукис и позволяет вам контролировать сервисы которые вы хотите активировать",
     "alertSmall": "Настройка сервисов",
     "personalize": "Персонализировать",
+    "personalizeCookies": "Customize cookie management",
     "acceptAll": "Ок, все активировать",
     "acceptAllCookies": "OK, accept all cookies",
     "close": "Закрыть",
