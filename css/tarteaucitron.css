@@ -768,9 +768,7 @@ div.amazon_product {
 }
 
 a.tarteaucitronSelfLink {
-    position: absolute;
-    left: 0;
-    right: 0;
+    background-color: #d7d7d7;
     padding-top: 13px!important;
     display: block;
     text-shadow: 0 0 14px white;
