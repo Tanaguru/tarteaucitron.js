@@ -502,6 +502,10 @@ div#tarteaucitronServices {
     width: 100%;
 }
 
+#tarteaucitronAlertBig #tarteaucitronDisclaimerAlert {
+    display: inline;
+}
+
 #tarteaucitronAlertBig #tarteaucitronPrivacyUrl,
 #tarteaucitronAlertBig #tarteaucitronDisclaimerAlert,
 #tarteaucitronAlertBig #tarteaucitronDisclaimerAlert strong {
@@ -750,7 +754,7 @@ div.amazon_product {
     opacity: 0.4;
 }
 
-p#tarteaucitronInfo {
+#tarteaucitronInfo {
     display: block!important;
     position: relative !important;
     text-align: center!important;
