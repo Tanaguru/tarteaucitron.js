@@ -12,6 +12,7 @@ tarteaucitron.lang = {
     "alertSmall": "Διαχείριση υπηρεσιών",
     "personalize": "Εξατομίκευση",
     "acceptAll": "OK, αποδοχή όλων",
+    "acceptAllCookies": "OK, accept all cookies",
     "close": "Κλείσιμο",
 
     "privacyUrl": "Πολιτική απορρήτου",

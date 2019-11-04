@@ -12,6 +12,7 @@ tarteaucitron.lang = {
     "alertSmall": "Zarządzanie usługami",
     "personalize": "Personalizacja",
     "acceptAll": "OK, akceptuję wszystko",
+    "acceptAllCookies": "OK, accept all cookies",
     "close": "zamknij",
 
     "privacyUrl": "Polityka prywatności",

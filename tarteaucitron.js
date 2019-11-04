@@ -360,7 +360,7 @@ var tarteaucitron = {
 
                     html += '   </p>';
                     html += '   <span class="tarteaucitronAlertBigBtnWrapper">';
-                    html += '   <button type="button" id="tarteaucitronPersonalize" onclick="tarteaucitron.userInterface.respondAll(true);">';
+                    html += '   <button type="button" id="tarteaucitronPersonalize" onclick="tarteaucitron.userInterface.respondAll(true);" aria-label="' + tarteaucitron.lang.acceptAllCookies + '">';
                     html += '       <span class="icon" aria-hidden="true">&#10003; </span>' + tarteaucitron.lang.acceptAll;
                     html += '   </button>';
                     html += '   <button type="button" id="tarteaucitronCloseAlert" onclick="tarteaucitron.userInterface.openPanel();">';
