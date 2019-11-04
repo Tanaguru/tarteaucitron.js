@@ -835,9 +835,10 @@ var tarteaucitron = {
 
             if (tarteaucitron.reloadThePage === true) {
                 window.location.reload();
-            } else {
-                tarteaucitron.userInterface.css('tarteaucitronBack', 'display', 'none');
             }
+
+            tarteaucitron.userInterface.css('tarteaucitronBack', 'display', 'none');
+
             if (document.getElementById('tarteaucitronCloseAlert') !== null && document.getElementById('tarteaucitronCloseAlert').offsetHeight > 0) {
                 document.getElementById('tarteaucitronCloseAlert').focus();
             } else {
