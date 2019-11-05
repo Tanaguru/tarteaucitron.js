@@ -691,6 +691,16 @@ var tarteaucitron = {
                     tarteaucitron.userInterface.color(key, status);
                 }
             }
+
+            if (status === true) {
+                document.getElementById('tarteaucitronAllAllowed').setAttribute('disabled', 'disabled');
+                document.getElementById('tarteaucitronAllDenied').removeAttribute('disabled');
+                document.getElementById('tarteaucitronAllDenied').focus();
+            } else {
+                document.getElementById('tarteaucitronAllDenied').setAttribute('disabled', 'disabled');
+                document.getElementById('tarteaucitronAllAllowed').removeAttribute('disabled');
+                document.getElementById('tarteaucitronAllAllowed').focus();
+            }
         },
         "respond": function (el, status) {
             "use strict";
@@ -718,6 +728,16 @@ var tarteaucitron = {
             tarteaucitron.state[key] = status;
             tarteaucitron.cookie.create(key, status);
             tarteaucitron.userInterface.color(key, status);
+
+            el.setAttribute('disabled', 'disabled');
+
+            if (status === true) {
+                el.nextElementSibling.removeAttribute('disabled');
+                el.nextElementSibling.focus();
+            } else {
+                el.previousElementSibling.removeAttribute('disabled');
+                el.previousElementSibling.focus();
+            }
         },
         "color": function (key, status) {
             "use strict";
@@ -731,9 +751,13 @@ var tarteaucitron = {
             if (status === true) {
                 document.getElementById(key + 'Line').classList.add('tarteaucitronIsAllowed');
                 document.getElementById(key + 'Line').classList.remove('tarteaucitronIsDenied');
+                document.getElementById(key + 'Line').querySelector('.tarteaucitronAllow').setAttribute('disabled', 'disabled');
+                document.getElementById(key + 'Line').querySelector('.tarteaucitronDeny').removeAttribute('disabled');
             } else if (status === false) {
                 document.getElementById(key + 'Line').classList.remove('tarteaucitronIsAllowed');
                 document.getElementById(key + 'Line').classList.add('tarteaucitronIsDenied');
+                document.getElementById(key + 'Line').querySelector('.tarteaucitronDeny').setAttribute('disabled', 'disabled');
+                document.getElementById(key + 'Line').querySelector('.tarteaucitronAllow').removeAttribute('disabled');
             }
 
             // check if all services are allowed
@@ -755,17 +779,26 @@ var tarteaucitron = {
                 tarteaucitron.userInterface.removeClass(c + 'AllDenied', c + 'IsSelected');
                 tarteaucitron.userInterface.addClass(c + 'AllAllowed', c + 'IsSelected');
 
+                document.getElementById('tarteaucitronAllAllowed').setAttribute('disabled', 'disabled');
+                document.getElementById('tarteaucitronAllDenied').removeAttribute('disabled');
+
                 tarteaucitron.userInterface.addClass(c + 'MainLineOffset', c + 'IsAllowed');
                 tarteaucitron.userInterface.removeClass(c + 'MainLineOffset', c + 'IsDenied');
             } else if (nbAllowed === 0 && nbPending === 0) {
                 tarteaucitron.userInterface.removeClass(c + 'AllAllowed', c + 'IsSelected');
                 tarteaucitron.userInterface.addClass(c + 'AllDenied', c + 'IsSelected');
 
+                document.getElementById('tarteaucitronAllDenied').setAttribute('disabled', 'disabled');
+                document.getElementById('tarteaucitronAllAllowed').removeAttribute('disabled');
+
                 tarteaucitron.userInterface.removeClass(c + 'MainLineOffset', c + 'IsAllowed');
                 tarteaucitron.userInterface.addClass(c + 'MainLineOffset', c + 'IsDenied');
             } else {
                 tarteaucitron.userInterface.removeClass(c + 'AllAllowed', c + 'IsSelected');
                 tarteaucitron.userInterface.removeClass(c + 'AllDenied', c + 'IsSelected');
+
+                document.getElementById('tarteaucitronAllDenied').removeAttribute('disabled');
+                document.getElementById('tarteaucitronAllAllowed').removeAttribute('disabled');
 
                 tarteaucitron.userInterface.removeClass(c + 'MainLineOffset', c + 'IsAllowed');
                 tarteaucitron.userInterface.removeClass(c + 'MainLineOffset', c + 'IsDenied');
