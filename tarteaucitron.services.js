@@ -30,6 +30,23 @@ tarteaucitron.services.iframe = {
     }
 };
 
+// abtasty
+tarteaucitron.services.abtasty = {
+    "key": "abtasty",
+    "type": "api",
+    "name": "ABTasty",
+    "uri": "https://www.abtasty.com/terms-of-use/",
+    "needConsent": true,
+    "cookies": ['ABTasty', 'ABTastySession'],
+    "js": function () {
+        "use strict";
+        if (tarteaucitron.user.abtastyID === undefined) {
+            return;
+        }
+        tarteaucitron.addScript('//try.abtasty.com/'+tarteaucitron.user.abtastyID+'.js');
+    }
+};
+
 // addthis
 tarteaucitron.services.addthis = {
     "key": "addthis",
@@ -434,6 +451,23 @@ tarteaucitron.services.clicmanager = {
         "use strict";
         var id = 'clicmanager';
         tarteaucitron.fallback(['clicmanager-canvas'], tarteaucitron.engage(id));
+    }
+};
+
+// contentsquare
+tarteaucitron.services.contentsquare = {
+    "key": "contentsquare",
+    "type": "api",
+    "name": "ContentSquare",
+    "uri": "https://docs.contentsquare.com/uxa-en/#collected-data",
+    "needConsent": true,
+    "cookies": ['_cs_id', '_cs_s', '_cs_vars', '_cs_ex', '_cs_c', '_cs_optout'],
+    "js": function () {
+        "use strict";
+        if (tarteaucitron.user.contentsquareID === undefined) {
+            return;
+        }
+        tarteaucitron.addScript('//t.contentsquare.net/uxa/'+tarteaucitron.user.contentsquareID+'.js');
     }
 };
 
@@ -1267,6 +1301,29 @@ tarteaucitron.services.googletagmanager = {
         });
         tarteaucitron.addScript('//www.googletagmanager.com/gtm.js?id=' + tarteaucitron.user.googletagmanagerId);
     }
+};
+
+// google webfonts
+tarteaucitron.services.googlefonts = {
+  "key": "googlefonts",
+  "type": "api",
+  "name": "Google Webfonts",
+  "uri": "https://www.google.com/intl/de/policies/privacy/",
+  "needConsent": true,
+  "cookies": [],
+  "js": function () {
+    "use strict";
+    if (tarteaucitron.user.googleFonts === undefined) {
+      return;
+    }
+    tarteaucitron.addScript('//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js', '', function () {
+      WebFont.load({
+        google: {
+          families: tarteaucitron.user.googleFonts
+        }
+      });
+    });
+  }
 };
 
 // hubspot
