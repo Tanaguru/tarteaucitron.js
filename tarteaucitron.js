@@ -44,6 +44,9 @@ var tarteaucitron = {
             if (window.addEventListener) {
                 window.addEventListener("load", function () {
                     tarteaucitron.load();
+                    if (tarteaucitron.orientation === 'middle') {
+                        tarteaucitron.userInterface.initMiddleAlert();
+                    }
                     tarteaucitron.fallback(['tarteaucitronOpenPanel'], function (elem) {
                         elem.addEventListener("click", function (event) {
                             tarteaucitron.userInterface.openPanel();
@@ -100,6 +103,9 @@ var tarteaucitron = {
             } else {
                 window.attachEvent("onload", function () {
                     tarteaucitron.load();
+                    if (tarteaucitron.orientation === 'middle') {
+                        tarteaucitron.userInterface.initMiddleAlert();
+                    }
                     tarteaucitron.fallback(['tarteaucitronOpenPanel'], function (elem) {
                         elem.attachEvent("onclick", function (event) {
                             tarteaucitron.userInterface.openPanel();
@@ -261,7 +267,7 @@ var tarteaucitron = {
           }
             tarteaucitron.addScript(pathToServices, '', function () {
 
-                // css for new middle bar
+                // css and trapped focus for new middle bar
                 if (tarteaucitron.orientation === 'middle') {
                     var customThemeMiddle = document.createElement('style'),
                         cssRuleMiddle = 'div#tarteaucitronAlertBig:before {content: \'' + tarteaucitron.lang.middleBarHead + '\';font-size: 50px;}body #tarteaucitronRoot div#tarteaucitronAlertBig {width: 60%;min-width: 285px;height: auto;margin: auto;left: 50%;top: 50%;transform: translate(-50%, -50%);box-shadow: 0 0 9000px #000;border-radius: 20px;padding: 50px 0;}#tarteaucitronDisclaimerAlert {padding: 0 30px;}#tarteaucitronRoot #tarteaucitronDisclaimerAlert {margin: 50px 0;display: block;text-align: center;font-size: 21px;}';
@@ -347,9 +353,13 @@ var tarteaucitron = {
                 }
 
                 if (tarteaucitron.parameters.highPrivacy && !tarteaucitron.parameters.AcceptAllCta) {
-                    html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '">';
-                    // html += '<div class="tarteaucitronAlertBigWrapper">';
+                    html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '"';
+                    if (tarteaucitron.orientation === 'middle') {
+                    html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '"';
+                    }
+                    html += '>';
                     html += '   <p id="tarteaucitronDisclaimerAlert">';
+                    // html += '<div class="tarteaucitronAlertBigWrapper">';
                     html += '       ' + tarteaucitron.lang.alertBigPrivacy;
                     html += '   </p>';
                     // html += '   <span class="tarteaucitronAlertBigBtnWrapper">';
@@ -367,7 +377,11 @@ var tarteaucitron = {
                     //html += '</div>';
                     html += '</div>';
                 } else {
-                    html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '">';
+                    html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '"';
+                    if (tarteaucitron.orientation === 'middle') {
+                    html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '"';
+                    }
+                    html += '>';
                     //html += '<div class="tarteaucitronAlertBigWrapper">';
                     html += '   <p id="tarteaucitronDisclaimerAlert">';
 
@@ -720,11 +734,17 @@ var tarteaucitron = {
             if (status === true) {
                 document.getElementById('tarteaucitronAllAllowed').setAttribute('disabled', 'disabled');
                 document.getElementById('tarteaucitronAllDenied').removeAttribute('disabled');
-                document.getElementById('tarteaucitronAllDenied').focus();
             } else {
                 document.getElementById('tarteaucitronAllDenied').setAttribute('disabled', 'disabled');
                 document.getElementById('tarteaucitronAllAllowed').removeAttribute('disabled');
-                document.getElementById('tarteaucitronAllAllowed').focus();
+            }
+
+            if (document.getElementById('tarteaucitron')) {
+                if (status === true) {
+                    document.getElementById('tarteaucitronAllDenied').focus();
+                } else {
+                    document.getElementById('tarteaucitronAllAllowed').focus();
+                }
             }
         },
         "respond": function (el, status) {
@@ -832,6 +852,7 @@ var tarteaucitron = {
             // close the alert if all service have been reviewed
             if (nbPending === 0) {
                 tarteaucitron.userInterface.closeAlert();
+                tarteaucitron.userInterface.showBodyElements();
             }
 
             if (tarteaucitron.services[key].cookies.length > 0 && status === false) {
@@ -924,10 +945,12 @@ var tarteaucitron = {
                 filtered,
                 container;
 
-            if (document.getElementById('tarteaucitron').offsetHeight > 0) {
+            if (document.getElementById('tarteaucitron') && document.getElementById('tarteaucitron').offsetHeight > 0) {
                 container = document.getElementById('tarteaucitron');
-            } else if (document.getElementById('tarteaucitronCookiesListContainer').offsetHeight > 0) {
+            } else if (document.getElementById('tarteaucitronCookiesListContainer') && document.getElementById('tarteaucitronCookiesListContainer').offsetHeight > 0) {
                 container = document.getElementById('tarteaucitronCookiesListContainer');
+            } else if (document.getElementById('tarteaucitronAlertBig') && document.getElementById('tarteaucitronAlertBig').offsetHeight > 0 && tarteaucitron.orientation === 'middle') {
+                container = document.getElementById('tarteaucitronAlertBig');
             } else {
                 return;
             }
@@ -1200,6 +1223,40 @@ var tarteaucitron = {
                     tarteaucitron.userInterface.css('tarteaucitronCookiesList', 'height', (cookiesListHeight - cookiesCloseHeight - cookiesTitleHeight - 2) + 'px');
                 }
             }
+        },
+        "initMiddleAlert": function () {
+            var modalHadFocus = false;
+
+            setTimeout(function() {
+                tarteaucitron.userInterface.focusTrap();
+            }, 100);
+
+            document.addEventListener('keydown', function(event) {
+                if (!modalHadFocus && event.key === 'Tab') {
+                    if (document.querySelector('#tarteaucitronPersonalize')) {
+                        document.querySelector('#tarteaucitronPersonalize').focus();
+                        modalHadFocus = true;
+                    } else {
+                        document.querySelector('#tarteaucitronCloseAlert').focus();
+                        modalHadFocus = true;
+                    }
+                    event.preventDefault();
+                }
+            });
+
+            tarteaucitron.userInterface.hideBodyElements();
+        },
+        "hideBodyElements": function () {
+            var elements = Array.prototype.slice.call(document.body.children);
+            elements.forEach(function(elem) {
+                elem.setAttribute('aria-hidden', 'true');
+            });
+        },
+        "showBodyElements": function () {
+            var elements = Array.prototype.slice.call(document.body.children);
+            elements.forEach(function(elem) {
+                elem.removeAttribute('aria-hidden');
+            });
         }
     },
     "cookie": {

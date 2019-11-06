@@ -1,5 +1,6 @@
 /*global tarteaucitron */
 tarteaucitron.lang = {
+    "barTitle": "Cookie acceptance bar",
     "middleBarHead": "☝ 🍪",
     "adblock": "Olá! Em uma açao de transparencia, este site lhe dá a opção de quais serviços terceiros deseje ativar.",
     "adblock_call": "Por favor, desative seu bloqueador de publicidades para poder customizar.",
