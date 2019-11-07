@@ -1225,24 +1225,16 @@ var tarteaucitron = {
             }
         },
         "initMiddleAlert": function () {
-            var modalHadFocus = false;
-
             setTimeout(function() {
                 tarteaucitron.userInterface.focusTrap();
-            }, 100);
 
-            document.addEventListener('keydown', function(event) {
-                if (!modalHadFocus && event.key === 'Tab') {
-                    if (document.querySelector('#tarteaucitronPersonalize')) {
-                        document.querySelector('#tarteaucitronPersonalize').focus();
-                        modalHadFocus = true;
-                    } else {
-                        document.querySelector('#tarteaucitronCloseAlert').focus();
-                        modalHadFocus = true;
-                    }
-                    event.preventDefault();
+                if (document.querySelector('#tarteaucitronPersonalize')) {
+                    document.querySelector('#tarteaucitronPersonalize').focus();
+                } else {
+                    document.querySelector('#tarteaucitronCloseAlert').focus();
                 }
-            });
+
+            }, 100);
 
             tarteaucitron.userInterface.hideBodyElements();
         },
