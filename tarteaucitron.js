@@ -330,7 +330,9 @@ var tarteaucitron = {
                 html += '         <div class="clear"></div><ul>';
                 for (i = 0; i < cat.length; i += 1) {
                     html += '         <li id="tarteaucitronServicesTitle_' + cat[i] + '" class="tarteaucitronHidden">';
+                                        // [Accessibility] This is a title so we need to make the following element a level 2 ARIA heading (it could be a <h2></h2>) to structure the content.
                     html += '            <div class="tarteaucitronTitle" role="heading" aria-level="2">';
+                                            // [Accessibility] This button is showing / hiding content so we need to use aria-expanded ("true" value if it's open and "false" if it's closed) and aria-controls (its value is the ID of the content it controls) to make it accessible (see doc: https://www.w3.org/TR/wai-aria-practices/#disclosure).
                     html += '               <button type="button" onclick="tarteaucitron.userInterface.toggle(\'tarteaucitronDetails' + cat[i] + '\', \'tarteaucitronInfoBox\', this);return false" aria-expanded="false" aria-controls="tarteaucitronDetails' + cat[i] + '">&#10011; ' + tarteaucitron.lang[cat[i]].title + '</button>';
                     html += '            </div>';
                     html += '            <p id="tarteaucitronDetails' + cat[i] + '" class="tarteaucitronDetails tarteaucitronInfoBox">';
@@ -355,14 +357,15 @@ var tarteaucitron = {
                 if (tarteaucitron.parameters.highPrivacy && !tarteaucitron.parameters.AcceptAllCta) {
                     html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '"';
                     if (tarteaucitron.orientation === 'middle') {
-                    html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '"';
+                        // [Accessibility] If the middle orientation is chosen, it must be a modal window.
+                        html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '"';
                     }
                     html += '>';
+                    //html += '<div class="tarteaucitronAlertBigWrapper">';
                     html += '   <p id="tarteaucitronDisclaimerAlert">';
-                    // html += '<div class="tarteaucitronAlertBigWrapper">';
                     html += '       ' + tarteaucitron.lang.alertBigPrivacy;
                     html += '   </p>';
-                    // html += '   <span class="tarteaucitronAlertBigBtnWrapper">';
+                    //html += '   <span class="tarteaucitronAlertBigBtnWrapper">';
                     html += '   <button type="button" id="tarteaucitronPersonalize" onclick="tarteaucitron.userInterface.openPanel();" aria-label="' + tarteaucitron.lang.personalizeCookies + '">';
                     html += '       ' + tarteaucitron.lang.personalize;
                     html += '   </button>';
@@ -379,7 +382,8 @@ var tarteaucitron = {
                 } else {
                     html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '"';
                     if (tarteaucitron.orientation === 'middle') {
-                    html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '"';
+                        // [Accessibility] If the middle orientation is chosen, it must be a modal window.
+                        html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '"';
                     }
                     html += '>';
                     //html += '<div class="tarteaucitronAlertBigWrapper">';
@@ -392,7 +396,7 @@ var tarteaucitron = {
                     }
 
                     html += '   </p>';
-                    // html += '   <span class="tarteaucitronAlertBigBtnWrapper">';
+                    //html += '   <span class="tarteaucitronAlertBigBtnWrapper">';
                     html += '   <button type="button" id="tarteaucitronPersonalize" onclick="tarteaucitron.userInterface.respondAll(true);" aria-label="' + tarteaucitron.lang.acceptAllCookies + '">';
                     html += '       <span class="icon" aria-hidden="true">&#10003; </span>' + tarteaucitron.lang.acceptAll;
                     html += '   </button>';
@@ -424,11 +428,13 @@ var tarteaucitron = {
                     if (tarteaucitron.parameters.cookieslist === true) {
                         html += '   </button><!-- @whitespace';
                         html += '   --><button type="button" id="tarteaucitronCookiesNumber" onclick="tarteaucitron.userInterface.toggleCookiesList();">0</button>';
+                                    // [Accessibility] It must be a modal window (its name is the visible heading in the modal window referenced by aria-labelledby).
                         html += '   <div id="tarteaucitronCookiesListContainer" role="dialog" aria-labelledby="tarteaucitronCookiesNumberBis">';
                         html += '       <button type="button" id="tarteaucitronClosePanelCookie" onclick="tarteaucitron.userInterface.toggleCookiesList();">';
                         html += '           ' + tarteaucitron.lang.close;
                         html += '       </button>';
                         html += '       <div class="tarteaucitronCookiesListMain" id="tarteaucitronCookiesTitle">';
+                                            // [Accessibility] We need to have a tabindex="-1" attribute on the heading to move focus on it after deleting a cookie to make screen reader users know that the cookie has indeed been deleted.
                         html += '            <span class="tarteaucitronH2" role="heading" aria-level="1" id="tarteaucitronCookiesNumberBis" tabindex="-1">0 cookie</span>';
                         html += '       </div>';
                         html += '       <div id="tarteaucitronCookiesList"></div>';
@@ -731,6 +737,7 @@ var tarteaucitron = {
                 }
             }
 
+            // [Accessibility] In order to inform screen reader users which button is active ("allow" or "deny"), we disable the activated button (it is useless to click it again) and we move the focus to the opposite button so that you can switch easily between the two and know which one is activated.
             if (status === true) {
                 document.getElementById('tarteaucitronAllAllowed').setAttribute('disabled', 'disabled');
                 document.getElementById('tarteaucitronAllDenied').removeAttribute('disabled');
@@ -774,6 +781,7 @@ var tarteaucitron = {
             tarteaucitron.cookie.create(key, status);
             tarteaucitron.userInterface.color(key, status);
 
+            // [Accessibility] In order to inform screen reader users which button is active ("allow" or "deny"), we disable the activated button (it is useless to click it again) and we move the focus to the opposite button so that you can switch easily between the two and know which one is activated.
             el.setAttribute('disabled', 'disabled');
 
             if (status === true) {
@@ -796,11 +804,13 @@ var tarteaucitron = {
             if (status === true) {
                 document.getElementById(key + 'Line').classList.add('tarteaucitronIsAllowed');
                 document.getElementById(key + 'Line').classList.remove('tarteaucitronIsDenied');
+                // [Accessibility] Inform screen reader users which button is active ("allow" or "deny")
                 document.getElementById(key + 'Line').querySelector('.tarteaucitronAllow').setAttribute('disabled', 'disabled');
                 document.getElementById(key + 'Line').querySelector('.tarteaucitronDeny').removeAttribute('disabled');
             } else if (status === false) {
                 document.getElementById(key + 'Line').classList.remove('tarteaucitronIsAllowed');
                 document.getElementById(key + 'Line').classList.add('tarteaucitronIsDenied');
+                // [Accessibility] Inform screen reader users which button is active ("allow" or "deny")
                 document.getElementById(key + 'Line').querySelector('.tarteaucitronDeny').setAttribute('disabled', 'disabled');
                 document.getElementById(key + 'Line').querySelector('.tarteaucitronAllow').removeAttribute('disabled');
             }
@@ -824,6 +834,7 @@ var tarteaucitron = {
                 tarteaucitron.userInterface.removeClass(c + 'AllDenied', c + 'IsSelected');
                 tarteaucitron.userInterface.addClass(c + 'AllAllowed', c + 'IsSelected');
 
+                // [Accessibility] Inform screen reader users which button is active ("allow" or "deny")
                 document.getElementById('tarteaucitronAllAllowed').setAttribute('disabled', 'disabled');
                 document.getElementById('tarteaucitronAllDenied').removeAttribute('disabled');
 
@@ -833,6 +844,7 @@ var tarteaucitron = {
                 tarteaucitron.userInterface.removeClass(c + 'AllAllowed', c + 'IsSelected');
                 tarteaucitron.userInterface.addClass(c + 'AllDenied', c + 'IsSelected');
 
+                // [Accessibility] Inform screen reader users which button is active ("allow" or "deny")
                 document.getElementById('tarteaucitronAllDenied').setAttribute('disabled', 'disabled');
                 document.getElementById('tarteaucitronAllAllowed').removeAttribute('disabled');
 
@@ -842,6 +854,7 @@ var tarteaucitron = {
                 tarteaucitron.userInterface.removeClass(c + 'AllAllowed', c + 'IsSelected');
                 tarteaucitron.userInterface.removeClass(c + 'AllDenied', c + 'IsSelected');
 
+                // [Accessibility] Inform screen reader users which button is active ("allow" or "deny")
                 document.getElementById('tarteaucitronAllDenied').removeAttribute('disabled');
                 document.getElementById('tarteaucitronAllAllowed').removeAttribute('disabled');
 
@@ -945,11 +958,15 @@ var tarteaucitron = {
                 filtered,
                 container;
 
+            // [Accessibility] Definition of the "container" variable whose element differs according to the modal in which we are (3 modals in tarteaucitron.js)
             if (document.getElementById('tarteaucitron') && document.getElementById('tarteaucitron').offsetHeight > 0) {
+                // Modal where you personalize the services
                 container = document.getElementById('tarteaucitron');
             } else if (document.getElementById('tarteaucitronCookiesListContainer') && document.getElementById('tarteaucitronCookiesListContainer').offsetHeight > 0) {
+                // Modal with the list of cookies
                 container = document.getElementById('tarteaucitronCookiesListContainer');
             } else if (document.getElementById('tarteaucitronAlertBig') && document.getElementById('tarteaucitronAlertBig').offsetHeight > 0 && tarteaucitron.orientation === 'middle') {
+                // Modal where you can allow or personalize the services with cookies
                 container = document.getElementById('tarteaucitronAlertBig');
             } else {
                 return;
@@ -1047,6 +1064,7 @@ var tarteaucitron = {
                 }, true);
             } else {
                 div.style.display = 'none';
+                // [Accessibility] When closing, give focus to the button which has opened the modal
                 document.getElementById('tarteaucitronCookiesNumber').focus();
                 tarteaucitron.userInterface.css('tarteaucitronBack', 'display', 'none');
             }
@@ -1224,6 +1242,7 @@ var tarteaucitron = {
                 }
             }
         },
+        // [Accessibility] If the middle orientation is chosen, it's a modal window so we need to trap focus inside it and elements outside the modal have to be hidden to prevent mistaken access to it
         "initMiddleAlert": function () {
             setTimeout(function() {
                 tarteaucitron.userInterface.focusTrap();
