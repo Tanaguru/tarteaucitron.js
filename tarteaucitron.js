@@ -78,8 +78,22 @@ var tarteaucitron = {
                 }, false);
 
                 window.addEventListener("keydown", function (evt) {
+                    // RG : on détecte l'endroit où on se trouve quand esc. est pressé et on clique sur le premier bouton si il s'agit d'une popin de tarteaucitron.
                     if (evt.keyCode === 27) {
-                        tarteaucitron.userInterface.closePanel();
+                        var tarteaucitronDialogCssSelector = '#tarteaucitron[role="dialog"] *, #tarteaucitronCookiesListContainer[role="dialog"] *';
+                        var tarteaucitronSource = document.activeElement.matches(tarteaucitronDialogCssSelector) || document.activeElement.msMatchesSelector(tarteaucitronDialogCssSelector);
+                        if (tarteaucitronSource) {
+                            var tarteaucitronClosestDialog = document.activeElement.closest('[role="dialog"]') || (function (e, s) {
+                                var el = e;
+                                do {
+                                    var elm = el.matches(s) || el.msMatchesSelector(s);
+                                    if (elm) return el;
+                                    el = el.parentElement || el.parentNode;
+                                } while (el !== null && el.nodeType === 1);
+                                return null;
+                            })(document.activeElement, '[role="dialog"]');
+                            tarteaucitronClosestDialog.querySelector('button').click();
+                        }
                     }
                 }, false);
                 window.addEventListener("hashchange", function () {
@@ -1412,30 +1426,36 @@ var tarteaucitron = {
             });
 
             if (document.cookie !== '') {
+                // RG : on crée un objet correspondant à la liste des cookies pour générer ensuite l'UI.
+                var cookieslist = {};
                 for (i = 0; i < nb; i += 1) {
                     name = cookies[i].split('=', 1).toString().replace(/ /g, '');
-                    if (tarteaucitron.cookie.owner[name] !== undefined && tarteaucitron.cookie.owner[name].join(' // ') !== savedname) {
-                        savedname = tarteaucitron.cookie.owner[name].join(' // ');
-                        html += '<div class="tarteaucitronHidden">';
-                        html += '     <span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="2">';
-                        html += '        ' + tarteaucitron.cookie.owner[name].join(' // ');
-                        html += '    </span>';
-                        html += '</div><ul class="cookie-list">';
-                    } else if (tarteaucitron.cookie.owner[name] === undefined && host !== savedname) {
-                        savedname = host;
-                        html += '<div class="tarteaucitronHidden">';
-                        html += '     <span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="2">';
-                        html += '        ' + host;
-                        html += '    </span>';
-                        html += '</div><ul class="cookie-list">';
+                    if (tarteaucitron.cookie.owner[name] !== undefined) {
+                        if (!cookieslist.hasOwnProperty(tarteaucitron.cookie.owner[name].join(' // '))) {
+                            cookieslist[tarteaucitron.cookie.owner[name].join(' // ')] = [];
+                        }
+                        cookieslist[tarteaucitron.cookie.owner[name].join(' // ')].push(cookies[i]);
+                    } else {
+                        if (!cookieslist.hasOwnProperty(host)) {
+                            cookieslist[host] = [];
+                        }
+                        cookieslist[host].push(cookies[i]);
                     }
-                    html += '<li class="tarteaucitronCookiesListMain">';
-                    html += '    <div class="tarteaucitronCookiesListLeft"><button type="button" onclick="tarteaucitron.cookie.purge([\'' + cookies[i].split('=', 1) + '\']);tarteaucitron.cookie.number();tarteaucitron.userInterface.jsSizing(\'cookie\');return false" aria-label="' + tarteaucitron.lang.removeCookie + ' ' + name + '"><strong>&times;</strong></button> <strong>' + name + '</strong>';
-                    html += '    </div>';
-                    html += '    <div class="tarteaucitronCookiesListRight">' + cookies[i].split('=').slice(1).join('=') + '</div>';
-                    html += '</li>';
                 }
-                html += '</ul>';
+                for (var d in cookieslist) {
+                    html += '<div class="tarteaucitronHidden"><span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="2">' + d + '</span></div>';
+                    html += '<ul class="cookie-list">';
+                    for (var c = 0; c < cookieslist[d].length; c++) {
+                        name = cookieslist[d][c].split('=', 1).toString().replace(/ /g, '');
+                        html += '<li class="tarteaucitronCookiesListMain">';
+                        html += '<div class="tarteaucitronCookiesListLeft">';
+                        html += '<button type="button" onclick="tarteaucitron.cookie.purge([\'' + cookieslist[d][c].split('=', 1) + '\']);tarteaucitron.cookie.number();tarteaucitron.userInterface.jsSizing(\'cookie\');return false" aria-label="' + tarteaucitron.lang.removeCookie + ' ' + name + '"><strong>&times;</strong></button> <strong>' + name + '</strong>';
+                        html += '</div>';
+                        html += '<div class="tarteaucitronCookiesListRight">' + cookieslist[d][c].split('=').slice(1).join('=') + '</div>';
+                        html += '</li>';
+                    }
+                    html += '</ul>';
+                }
             } else {
                 html += '<div class="tarteaucitronCookiesListMain">';
                 html += '    <div class="tarteaucitronCookiesListLeft"><strong>-</strong></div>';
