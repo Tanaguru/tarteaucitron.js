@@ -372,7 +372,7 @@ var tarteaucitron = {
                     html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '"';
                     if (tarteaucitron.orientation === 'middle') {
                         // [Accessibility] If the middle orientation is chosen, it must be a modal window.
-                        html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '"';
+                        html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '">';
                     }
                     html += '>';
                     //html += '<div class="tarteaucitronAlertBigWrapper">';
@@ -1000,23 +1000,26 @@ var tarteaucitron = {
             lastFocusableEl = filtered[filtered.length - 1];
 
             //loop focus inside tarteaucitron or tarteaucitronCookiesListContainer
-            container.addEventListener("keydown", function (evt) {
-
-                if ( evt.key === 'Tab' || evt.keyCode === 9 ) {
-
-                    if ( evt.shiftKey ) /* shift + tab */ {
-                        if (document.activeElement === firstFocusableEl) {
-                            lastFocusableEl.focus();
-                            evt.preventDefault();
-                        }
-                    } else /* tab */ {
-                        if (document.activeElement === lastFocusableEl) {
-                            firstFocusableEl.focus();
-                            evt.preventDefault();
+            // RG : on crée une classe sur la zone afin qu'un seul gestionnaire d'événements soit présent.
+            if (!container.hasAttribute('class')) {
+                container.setAttribute('class', 'js-hasevent');
+                container.addEventListener("keydown", function (evt) {
+                    if ( evt.key === 'Tab' || evt.keyCode === 9 ) {
+                        if ( evt.shiftKey ) /* shift + tab */ {
+                            if (document.activeElement === firstFocusableEl) {
+                                lastFocusableEl.focus();
+                                evt.preventDefault();
+                            }
+                        } else /* tab */ {
+                            if (document.activeElement === lastFocusableEl) {
+                                firstFocusableEl.focus();
+                                evt.preventDefault();
+                            }
                         }
                     }
-                }
-            })
+                }, false);
+            }
+
         },
         "openAlert": function () {
             "use strict";
