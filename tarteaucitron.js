@@ -1261,6 +1261,7 @@ var tarteaucitron = {
         },
         // [Accessibility] If the middle orientation is chosen, it's a modal window so we need to trap focus inside it and elements outside the modal have to be hidden to prevent mistaken access to it
         "initMiddleAlert": function () {
+            // RG : durée avant exécution ajustée pour permettre la prise de focus.
             setTimeout(function() {
                 tarteaucitron.userInterface.focusTrap();
 
@@ -1270,8 +1271,7 @@ var tarteaucitron = {
                     document.querySelector('#tarteaucitronCloseAlert').focus();
                 }
 
-            }, 100);
-
+            }, 200);
             tarteaucitron.userInterface.hideBodyElements();
         },
         "hideBodyElements": function () {
