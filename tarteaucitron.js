@@ -372,7 +372,7 @@ var tarteaucitron = {
                     html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '"';
                     if (tarteaucitron.orientation === 'middle') {
                         // [Accessibility] If the middle orientation is chosen, it must be a modal window.
-                        html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '">';
+                        html += ' role="dialog" aria-label="' + tarteaucitron.lang.barTitle + '"';
                     }
                     html += '>';
                     //html += '<div class="tarteaucitronAlertBigWrapper">';
